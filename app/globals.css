@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+html.light {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-mist-50 text-void-900 dark:bg-void-950 dark:text-mist-100;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ambient noise + gradient wash behind the whole app */
+.app-backdrop {
+  background-image: radial-gradient(
+      circle at 15% 0%,
+      rgba(124, 92, 255, 0.16),
+      transparent 45%
+    ),
+    radial-gradient(circle at 85% 20%, rgba(34, 211, 238, 0.12), transparent 40%);
+}
+.dark .app-backdrop {
+  background-color: #07080d;
+}
+.app-backdrop.light-bg {
+  background-color: #f7f7fb;
+}
+
+/* Glass panel utility */
+.glass {
+  @apply border border-black/5 bg-white/70 backdrop-blur-xl dark:border-white/[0.08] dark:bg-white/[0.04];
+}
+
+.glass-strong {
+  @apply border border-black/5 bg-white/90 backdrop-blur-2xl dark:border-white/10 dark:bg-void-800/60;
+}
+
+/* Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(124, 92, 255, 0.35) transparent;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(124, 92, 255, 0.35);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 92, 255, 0.55);
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Focus visibility (accessibility) */
+:focus-visible {
+  outline: 2px solid #7c5cff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Typing caret */
+.typing-caret::after {
+  content: "▍";
+  display: inline-block;
+  margin-left: 1px;
+  color: #7c5cff;
+  animation: blink 1s step-start infinite;
+}
+
+/* --- Markdown content styling --- */
+.markdown-body {
+  @apply text-[0.95rem] leading-relaxed;
+}
+.markdown-body > *:first-child {
+  margin-top: 0;
+}
+.markdown-body > *:last-child {
+  margin-bottom: 0;
+}
+.markdown-body p {
+  @apply my-2.5;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  @apply mb-3 mt-5 font-display font-semibold text-void-900 dark:text-mist-50;
+}
+.markdown-body h1 {
+  @apply text-xl;
+}
+.markdown-body h2 {
+  @apply text-lg;
+}
+.markdown-body h3 {
+  @apply text-base;
+}
+.markdown-body ul {
+  @apply my-2.5 list-disc space-y-1 pl-5;
+}
+.markdown-body ol {
+  @apply my-2.5 list-decimal space-y-1 pl-5;
+}
+.markdown-body a {
+  @apply text-signal-violet underline decoration-signal-violet/40 underline-offset-2 hover:decoration-signal-violet;
+}
+.markdown-body blockquote {
+  @apply my-3 border-l-2 border-signal-violet/50 pl-3 italic text-void-700 dark:text-mist-200/80;
+}
+.markdown-body table {
+  @apply my-3 w-full border-collapse overflow-hidden rounded-lg text-sm;
+}
+.markdown-body th,
+.markdown-body td {
+  @apply border border-black/10 px-3 py-1.5 text-left dark:border-white/10;
+}
+.markdown-body th {
+  @apply bg-black/5 font-medium dark:bg-white/5;
+}
+.markdown-body code:not(pre code) {
+  @apply rounded bg-black/[0.06] px-1.5 py-0.5 font-mono text-[0.85em] text-signal-violet dark:bg-white/10 dark:text-signal-cyan;
+}
+.markdown-body pre {
+  @apply my-0 overflow-x-auto rounded-none bg-transparent p-0;
+}
+.markdown-body hr {
+  @apply my-4 border-black/10 dark:border-white/10;
+}
