@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Auth System Premium</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div id="toast-container"></div>
+
+  <!-- Ditampilkan selagi memverifikasi sesi -->
+  <div id="loading-screen" class="center-spinner">
+    <span class="spinner" style="width:2rem;height:2rem;"></span>
+  </div>
+
+  <!-- Konten dashboard, disembunyikan sampai sesi terverifikasi -->
+  <div id="dashboard-content" class="dashboard-wrap" style="display:none;">
+    <div class="dashboard-top">
+      <h1 class="font-display">Dashboard</h1>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Ubah tema">☀️</button>
+    </div>
+
+    <div class="glass-card" style="max-width: 100%;">
+      <div class="profile-row">
+        <img id="user-avatar" src="" alt="Foto profil" />
+        <div>
+          <p class="name" id="user-fullname"></p>
+          <p class="username" id="user-username"></p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div><p class="label">Email</p><p class="value" id="info-email"></p></div>
+        <div><p class="label">Login via</p><p class="value" id="info-provider"></p></div>
+        <div><p class="label">Role</p><p class="value" id="info-role"></p></div>
+        <div><p class="label">Status</p><p class="value" id="info-status"></p></div>
+        <div><p class="label">Akun dibuat</p><p class="value" id="info-created"></p></div>
+        <div><p class="label">Login terakhir</p><p class="value" id="info-lastlogin"></p></div>
+      </div>
+
+      <button id="btn-logout" class="btn-logout">Logout</button>
+    </div>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/ui-helpers.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
