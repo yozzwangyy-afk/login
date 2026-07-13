@@ -1,0 +1,297 @@
+/* =========================================
+   GLOBAL STYLES — Premium Auth UI (Vanilla)
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0B0D12;
+  --bg-alt: #12151C;
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --text-faint: rgba(255, 255, 255, 0.4);
+  --accent: #E8A15C;
+  --accent-light: #F2B979;
+  --btn-bg: #1A1E28;
+  --btn-border: rgba(255, 255, 255, 0.1);
+  --danger: #EF4444;
+  --danger-bg: rgba(239, 68, 68, 0.1);
+  color-scheme: dark;
+}
+
+html.light {
+  --bg: #F7F7F5;
+  --bg-alt: #FFFFFF;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(18, 20, 28, 0.08);
+  --text: #12151C;
+  --text-muted: rgba(18, 20, 28, 0.65);
+  --text-faint: rgba(18, 20, 28, 0.45);
+  --btn-bg: #FFFFFF;
+  --btn-border: rgba(18, 20, 28, 0.1);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.font-display { font-family: 'Fraunces', serif; }
+
+/* ---------- Layout ---------- */
+.page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2.5rem 1rem;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 20;
+  border: 1px solid var(--btn-border);
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 0.5rem 0.65rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+.theme-toggle:hover { color: var(--accent); }
+
+/* ---------- Ambient background blobs (signature visual) ---------- */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+  animation: drift 14s ease-in-out infinite;
+}
+.blob--amber {
+  width: 24rem; height: 24rem;
+  top: -8rem; left: -8rem;
+  background: rgba(232, 161, 92, 0.2);
+}
+.blob--dark {
+  width: 24rem; height: 24rem;
+  bottom: -8rem; right: -5rem;
+  background: rgba(36, 42, 56, 0.5);
+  animation-delay: 3s;
+}
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(2%, -3%) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* ---------- Glass Card ---------- */
+.glass-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 26rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: card-in 0.6s ease-out forwards;
+}
+@keyframes card-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.brand-mark {
+  width: 2.5rem; height: 2.5rem;
+  margin: 0 auto 1rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--accent-light), var(--accent));
+}
+
+.card-header { text-align: center; margin-bottom: 2rem; }
+.card-header h1 { font-size: 1.5rem; font-weight: 600; margin: 0 0 0.25rem; letter-spacing: -0.01em; }
+.card-header p { margin: 0; font-size: 0.875rem; color: var(--text-muted); }
+
+/* ---------- Social buttons ---------- */
+.btn-social {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.btn-social:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(232, 161, 92, 0.4);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+.btn-social:active:not(:disabled) { transform: scale(0.98); }
+.btn-social:disabled { cursor: not-allowed; opacity: 0.6; }
+
+.spinner {
+  width: 1rem; height: 1rem;
+  border-radius: 50%;
+  border: 2px solid var(--btn-border);
+  border-top-color: var(--accent);
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.remember-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+.remember-row input { accent-color: var(--accent); width: 1rem; height: 1rem; }
+
+.legal-text {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+/* ---------- Error Dialog ---------- */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.overlay.visible { display: flex; opacity: 1; }
+
+.dialog {
+  width: 100%; max-width: 24rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(24px);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  transform: scale(0.95);
+  transition: transform 0.2s ease;
+}
+.overlay.visible .dialog { transform: scale(1); }
+
+.dialog-icon {
+  width: 2.5rem; height: 2.5rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.dialog h3 { margin: 0 0 0.25rem; font-size: 1.125rem; font-weight: 600; }
+.dialog p { margin: 0 0 1.25rem; font-size: 0.875rem; color: var(--text-muted); }
+.dialog button {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: none; border-radius: 0.75rem;
+  background: var(--accent);
+  color: #12151C;
+  font-weight: 500;
+  cursor: pointer;
+}
+.dialog button:hover { background: var(--accent-light); }
+
+/* ---------- Snackbar / Toast ---------- */
+#toast-container {
+  position: fixed;
+  top: 1.25rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex; flex-direction: column; gap: 0.5rem;
+  width: 100%; max-width: 22rem; padding: 0 1rem;
+}
+.toast {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: toast-in 0.25s ease forwards;
+}
+.toast.success { background: #16A34A; }
+.toast.error { background: #DC2626; }
+@keyframes toast-in { to { opacity: 1; transform: translateY(0); } }
+
+/* ---------- Dashboard ---------- */
+.dashboard-wrap { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1rem; }
+.dashboard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+.dashboard-top h1 { font-size: 1.25rem; font-weight: 600; margin: 0; }
+
+.profile-row { display: flex; align-items: center; gap: 1rem; }
+.profile-row img { width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; border: 1px solid var(--btn-border); }
+.profile-row .name { font-size: 1.125rem; font-weight: 600; margin: 0; }
+.profile-row .username { font-size: 0.875rem; color: var(--text-muted); margin: 0; }
+
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; font-size: 0.875rem; }
+.info-grid .label { text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; color: var(--text-faint); margin: 0 0 0.15rem; }
+.info-grid .value { font-weight: 500; margin: 0; }
+
+.btn-logout {
+  margin-top: 2rem; width: 100%;
+  padding: 0.65rem 1rem;
+  border: none; border-radius: 0.75rem;
+  background: var(--danger-bg); color: var(--danger);
+  font-weight: 500; cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-logout:hover { background: rgba(239,68,68,0.2); }
+
+.center-spinner {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+@media (max-width: 480px) {
+  .glass-card { padding: 2rem 1.25rem; }
+  .info-grid { grid-template-columns: 1fr; }
+}
