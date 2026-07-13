@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — Auth System Premium</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div id="toast-container"></div>
+
+  <div class="page">
+    <!-- Ambient background blobs — elemen visual signature halaman ini -->
+    <div class="blob blob--amber"></div>
+    <div class="blob blob--dark"></div>
+
+    <button id="theme-toggle" class="theme-toggle" aria-label="Ubah tema">☀️</button>
+
+    <div class="glass-card">
+      <div class="card-header">
+        <div class="brand-mark"></div>
+        <h1 class="font-display">Selamat Datang</h1>
+        <p>Masuk atau daftar hanya dalam satu ketukan.</p>
+      </div>
+
+      <!-- ---------- Tombol Google ---------- -->
+      <button id="btn-google" class="btn-social">
+        <span class="icon-slot">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="#4285F4" d="M23.52 12.27c0-.79-.07-1.54-.2-2.27H12v4.3h6.47c-.28 1.5-1.13 2.77-2.4 3.62v3h3.88c2.27-2.09 3.57-5.17 3.57-8.65z" />
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.07 7.93-2.91l-3.88-3c-1.08.72-2.45 1.15-4.05 1.15-3.11 0-5.75-2.1-6.69-4.93H1.3v3.1C3.26 21.3 7.31 24 12 24z" />
+            <path fill="#FBBC05" d="M5.31 14.31A7.2 7.2 0 0 1 4.9 12c0-.8.14-1.58.4-2.31v-3.1H1.3A12 12 0 0 0 0 12c0 1.93.46 3.76 1.3 5.41l4.01-3.1z" />
+            <path fill="#EA4335" d="M12 4.75c1.76 0 3.34.6 4.58 1.79l3.44-3.44C17.94 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.3 6.59l4.01 3.1C6.25 6.86 8.89 4.75 12 4.75z" />
+          </svg>
+        </span>
+        <span class="btn-label">Continue with Google</span>
+      </button>
+
+      <!-- ---------- Tombol Facebook ---------- -->
+      <button id="btn-facebook" class="btn-social">
+        <span class="icon-slot">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="#1877F2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z" />
+          </svg>
+        </span>
+        <span class="btn-label">Continue with Facebook</span>
+      </button>
+
+      <!-- ---------- Tombol Apple ---------- -->
+      <button id="btn-apple" class="btn-social">
+        <span class="icon-slot">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M16.365 1.43c0 1.14-.462 2.16-1.213 2.917-.826.83-2.14 1.47-3.19 1.39-.13-1.1.47-2.24 1.21-2.97.83-.83 2.28-1.44 3.19-1.34zM20.6 17.24c-.55 1.27-1.21 2.5-2.09 3.63-.98 1.24-1.98 2.47-3.57 2.5-1.55.03-2.05-.92-3.82-.92-1.77 0-2.32.9-3.8.95-1.53.05-2.68-1.34-3.67-2.57-2-2.5-3.53-7.08-1.48-10.17 1.02-1.53 2.83-2.5 4.8-2.53 1.5-.03 2.9.98 3.82.98.91 0 2.63-1.21 4.44-1.03.76.03 2.87.31 4.24 2.33-.11.07-2.53 1.47-2.5 4.39.03 3.5 3.07 4.66 3.63 4.87z" />
+          </svg>
+        </span>
+        <span class="btn-label">Continue with Apple</span>
+      </button>
+
+      <label class="remember-row">
+        <input type="checkbox" id="remember-me" checked />
+        Ingat saya di perangkat ini
+      </label>
+
+      <p class="legal-text">
+        Dengan melanjutkan, Anda menyetujui Ketentuan Layanan &amp; Kebijakan Privasi kami.
+      </p>
+    </div>
+  </div>
+
+  <!-- ---------- Error Dialog ---------- -->
+  <div id="error-overlay" class="overlay">
+    <div class="dialog">
+      <div class="dialog-icon">!</div>
+      <h3 class="font-display">Login Bermasalah</h3>
+      <p id="error-message">Terjadi kesalahan.</p>
+      <button id="error-close-btn">Mengerti</button>
+    </div>
+  </div>
+
+  <!-- SDK resmi tiap provider -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://connect.facebook.net/en_US/sdk.js" async defer></script>
+  <script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js" async defer></script>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/ui-helpers.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
