@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-white text-graphite-900 dark:bg-graphite-950 dark:text-white transition-colors duration-300;
+}
+
+/* Kartu kaca (glassmorphism) — elemen signature halaman login */
+.glass-card {
+  @apply bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl border border-graphite-900/10 dark:border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.25)];
+}
+
+/* Animasi ambient lembut di background */
+@keyframes drift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(2%, -3%) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+.ambient-blob {
+  animation: drift 14s ease-in-out infinite;
+}
+
+/* Hormati preferensi reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob { animation: none; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
